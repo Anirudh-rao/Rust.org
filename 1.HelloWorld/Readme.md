@@ -49,3 +49,13 @@ Printing is handled by a series of macros defined in std::fmt some of which incl
 5. `eprintln!`: same as eprint! but a newline is appended.
 
 All parse text in the same fashion. As a plus, Rust checks formatting correctness at compile time.
+
+`std::fmt` contains many traits which govern the display of text. The base form of two important ones are listed below:
+
+1. `fmt::Debug`: Uses the {:?} marker. Format text for debugging purposes.
+2. `fmt::Display`: Uses the {} marker. Format text in a more elegant, user friendly fashion.
+Here, we used fmt::Display because the std library provides implementations for these types. To print text for custom types, more steps are required.
+
+Implementing the fmt::Display trait automatically implements the ToString trait which allows us to convert the type to String.
+
+In line 43, #[allow(dead_code)] is an attribute which only apply to the module after it.
