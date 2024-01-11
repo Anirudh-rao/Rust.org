@@ -4,6 +4,7 @@ This will be our first deep dive into rust. We will cover the following topics:
 1. Hello World 
 2. Comments
 3. Formatted Input
+4. Formatting
 
 Lets Start `Rusting`:
 
@@ -59,3 +60,14 @@ Here, we used fmt::Display because the std library provides implementations for 
 Implementing the fmt::Display trait automatically implements the ToString trait which allows us to convert the type to String.
 
 In line 43, #[allow(dead_code)] is an attribute which only apply to the module after it.
+
+# Formatting
+We've seen that formatting is specified via a format string:
+
+1. `format!("{}", foo)` -> "3735928559"
+2. `format!("0x{:X}", foo)` -> "0xDEADBEEF"
+3. `format!("0o{:o}", foo)` -> "0o33653337357"
+
+The same variable (`foo`) can be formatted differently depending on which argument type is used: X vs o vs unspecified.
+
+This formatting functionality is implemented via traits, and there is one trait for each argument type. The most common formatting trait is Display, which handles cases where the argument type is left unspecified: {} for instance.
