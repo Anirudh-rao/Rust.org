@@ -31,11 +31,11 @@ Variables can always be type annotated. Numbers may additionally be annotated vi
 ## Literals and operators
 Integers `1`, floats `1.2`, characters `'a'`, strings `"abc"`, booleans `true` and the unit type () can be expressed using literals.
 
-Integers can, alternatively, be expressed using hexadecimal, octal or binary notation using these prefixes respectively: 0x, 0o or 0b.
+Integers can, alternatively, be expressed using `hexadecimal`, `octal` or `binary` notation using these prefixes respectively: 0x, 0o or 0b.
 
-Underscores can be inserted in numeric literals to improve readability, e.g. 1_000 is the same as 1000, and 0.000_001 is the same as 0.000001.
+Underscores can be inserted in numeric literals to improve readability, e.g. `1_000` is the same as `1000`, and 0.000_001 is the same as 0.000001.
 
-Rust also supports scientific E-notation, e.g. 1e6, 7.6e-4. The associated type is f64.
+Rust also supports scientific E-notation, e.g.`1e6`, `7.6e-4`. The associated type is `f64`.
 
 We need to tell the compiler the type of the literals we use. For now, we'll use the u32 suffix to indicate that the literal is an unsigned 32-bit integer, and the i32 suffix to indicate that it's a signed 32-bit integer.
 
@@ -44,3 +44,9 @@ The operators available and their precedence in Rust are similar to other C-like
 
 ## Tuples
 A tuple is a collection of values of different types. Tuples are constructed using parentheses (), and each tuple itself is a value with type signature (T1, T2, ...), where T1, T2 are the types of its members. Functions can use tuples to return multiple values, as tuples can hold any number of values.
+
+## Arrays and Slices
+An array is a collection of objects of the same type T, stored in contiguous memory. Arrays are created using brackets [], and their length, which is known at compile time, is part of their type signature [T; length].
+
+Slices are similar to arrays, but their length is not known at compile time. Instead, a slice is a two-word object; the first word is a pointer to the data, the second word is the length of the slice. The word size is the same as usize, determined by the processor architecture, e.g. 64 bits on an x86-64. Slices can be used to borrow a section of an array and have the type signature &[T].
+
