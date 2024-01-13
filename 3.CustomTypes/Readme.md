@@ -55,3 +55,11 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
     }
 }
 ```
+
+###  use
+The use declaration can be used so manual scoping isn't needed.
+
+### C-like
+`enum` can also be used as C-like enums.
+
+
