@@ -66,4 +66,13 @@ A match block can destructure items in a variety of ways.
 
 
 ### Binding
-Indirectly accessing a variable makes it impossible to branch and use that variable without re-binding. match provides the `@` sigil for binding values to names:
+Indirectly accessing a variable makes it impossible to branch and use that variable without re-binding. match provides the `@` sigil for binding values to names.
+
+
+## if let
+For some use cases, when matching enums, match is awkward.
+`if let` is cleaner for this use case and in addition allows various failure options to be specified.
+
+## let-else
+
+With let-else, a refutable pattern can match and bind variables in the surrounding scope like a normal let, or else diverge (e.g. break, return, panic!) when the pattern doesn't match.
