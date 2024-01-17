@@ -48,4 +48,18 @@ The for in construct is able to interact with an Iterator in several ways. As di
 
 2. `into_iter` - This consumes the collection so that on each iteration the exact data is provided. Once the collection has been consumed it is no longer available for reuse as it has been 'moved' within the loop.
 
-3. `iter_mut` - This mutably borrows each element of the collection, allowing for the collection to be modified in place
+3. `iter_mut` - This mutably borrows each element of the collection, allowing for the collection to be modified in place\
+
+
+## match
+Rust provides pattern matching via the match keyword, which can be used like a C switch. The first matching arm is evaluated and all possible values must be covered.
+
+
+### Destructuring
+A match block can destructure items in a variety of ways.
+
+1. `tuples`
+2. `Arrays/Slices`
+3. `Enum`
+4. `Pointers/ref`
+5. `structs`
