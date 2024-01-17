@@ -13,4 +13,15 @@ An integral part of any programming language are ways to modify control flow: if
 
 
 ## if/else
+
 Branching with if-else is similar to other languages. Unlike many of them, the boolean condition doesn't need to be surrounded by parentheses, and each condition is followed by a block. if-else conditionals are expressions, and, all branches must return the same type.
+
+## loop
+
+Rust provides a `loop` keyword to indicate an infinite loop.
+
+The break statement can be used to exit a loop at anytime, whereas the `continue` statement can be used to skip the rest of the iteration and start a new one.
+
+
+### Nesting and labels
+It's possible to `break` or continue outer loops when dealing with nested loops. In these cases, the loops must be annotated with some 'label, and the label must be passed to the `break`/`continue` statement.
