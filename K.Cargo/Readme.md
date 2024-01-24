@@ -11,12 +11,16 @@
 Most programs have dependencies on some libraries. If you have ever managed dependencies by hand, you know how much of a pain this can be. Luckily, the Rust ecosystem comes standard with cargo! cargo can manage dependencies for a project.
 
 To create a new Rust project,
-
+```
 ### A binary
+
 cargo new foo
 
+
 ### A library
+
 cargo new --lib bar
+```
 For the rest of this chapter, let's assume we are making a binary, rather than a library, but all of the concepts are the same.
 
 After the above commands, you should see a file hierarchy like this:
@@ -40,13 +44,13 @@ authors = ["mark"]
 
 [dependencies]
 ```
-The `name` field under `[package]` determines the name of the project. This is used by crates.io if you publish the crate (more later). It is also the name of the output binary when you compile.
+1. The `name` field under `[package]` determines the name of the project. This is used by crates.io if you publish the crate (more later). It is also the name of the output binary when you compile.
 
-The `version` field is a crate version number using Semantic Versioning.
+2. The `version` field is a crate version number using Semantic Versioning.
 
-The `authors` field is a list of authors used when publishing the crate.
+3. The `authors` field is a list of authors used when publishing the crate.
 
-The `[dependencies]` section lets you add dependencies for your project.
+4. The `[dependencies]` section lets you add dependencies for your project.
 
 For example, suppose that we want our program to have a great CLI. You can find lots of great packages on crates.io (the official Rust package registry). One popular choice is clap. As of this writing, the most recent published version of clap is 2.27.1. To add a dependency to our program, we can simply add the following to our Cargo.toml under `[dependencies]`: clap = "2.27.1". And that's it! You can start using clap in your program.
 
