@@ -67,3 +67,101 @@ bar = { path = "../bar" } # from a path in the local filesystem
 To build our project we can execute `cargo build` anywhere in the project directory (including subdirectories!). We can also do cargo run to build and run. Notice that these commands will resolve all dependencies, download crates if needed, and build everything, including your crate. (Note that it only rebuilds what it has not already built, similar to make).
 
 Voila! That's all there is to it!
+
+## Conventions
+In the previous chapter, we saw the following directory hierarchy:
+```
+foo
+├── Cargo.toml
+└── src
+    └── main.rs
+```
+Suppose that we wanted to have two binaries in the same project, though. What then?
+
+It turns out that `cargo` supports this. The default binary name is `main`, as we saw before, but you can add additional binaries by placing them in a `bin/` directory:
+```
+foo
+├── Cargo.toml
+└── src
+    ├── main.rs
+    └── bin
+        └── my_other_bin.rs
+```
+To tell `cargo` to only compile or run this binary, we just pass `cargo` the `--bin my_other_bin` flag, where my_other_bin is the name of the binary we want to work with.
+
+In addition to extra binaries, `cargo` supports more features such as benchmarks, tests, and examples.
+
+
+## Testing
+As we know testing is integral to any piece of software! Rust has first-class support for unit and integration testing (see this chapter in TRPL).
+
+From the testing chapters linked above, we see how to write unit tests and integration tests. Organizationally, we can place unit tests in the modules they test and integration tests in their own tests/ directory:
+```
+foo
+├── Cargo.toml
+├── src
+│   └── main.rs
+│   └── lib.rs
+└── tests
+    ├── my_test.rs
+    └── my_other_test.rs
+```
+Each file in `tests` is a separate integration test, i.e. a test that is meant to test your library as if it were being called from a dependent crate.
+
+The Testing chapter elaborates on the three different testing styles: Unit, Doc, and Integration.
+
+`cargo` naturally provides an easy way to run all of your tests!
+```
+$ cargo test
+```
+You should see output like this:
+```
+$ cargo test
+   Compiling blah v0.1.0 (file:///nobackup/blah)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.89 secs
+     Running target/debug/deps/blah-d3b32b97275ec472
+
+running 3 tests
+test test_bar ... ok
+test test_baz ... ok
+test test_foo_bar ... ok
+test test_foo ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
+You can also run tests whose name matches a pattern:
+
+``` 
+$ cargo test test_foo
+   Compiling blah v0.1.0 (file:///nobackup/blah)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.35 secs
+     Running target/debug/deps/blah-d3b32b97275ec472
+
+running 2 tests
+test test_foo ... ok
+test test_foo_bar ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out
+```
+
+One word of caution: Cargo may run multiple tests concurrently, so make sure that they don't race with each other.
+
+## Build Scripts
+Sometimes a normal build from cargo is not enough. Perhaps your crate needs some pre-requisites before cargo will successfully compile, things like code generation, or some native code that needs to be compiled. To solve this problem we have build scripts that Cargo can run.
+
+To add a build script to your package it can either be specified in the Cargo.toml as follows:
+```
+[package]
+...
+build = "build.rs"
+```
+Otherwise Cargo will look for a `build.rs` file in the project directory by default.
+
+### How to use a build script
+The build script is simply another Rust file that will be compiled and invoked prior to compiling anything else in the package. Hence it can be used to fulfill pre-requisites of your crate.
+
+Cargo provides the script with inputs via environment variables specified here that can be used.
+
+The script provides output via stdout. All lines printed are written to `target/debug/build/<pkg>/output`. Further, lines prefixed with `cargo:` will be interpreted by Cargo directly and hence can be used to define parameters for the package's compilation.
+
+For further specification and examples have a read of the Cargo specification.
